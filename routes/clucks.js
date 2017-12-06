@@ -14,8 +14,8 @@ router.get('/:id', (request, response) => {
     .first()
     .from('clucks')
     .where({id})  //{id} === {id: id}
-    .then(post => {
-      response.render('clucks/show',{post});
+    .then(cluck => {
+      response.render('clucks/show',{cluck});
     })
     .catch(error => response.send(error));
 });
