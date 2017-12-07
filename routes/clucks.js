@@ -36,12 +36,13 @@ router.post('/', (request, response) => {
 
 // PATH: /clucks VERB: GET List all the clucks
 router.get('/', (request, response) => {
+
   knex
     .select()
     .from('clucks')
     .orderBy('created_at', 'DESC')
     .then(clucks => {
-      response.render('clucks/index', {clucks: clucks});
+    response.render('clucks/index', {clucks: clucks});
     });
 })
 
