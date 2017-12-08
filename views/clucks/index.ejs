@@ -2,24 +2,29 @@
 
     <% for (let cluck of clucks) { %>
       <div class="container">
-        <div class="card">
+        <div class="card card w-100">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-2-inline">
-                  <a class="card-title" href="/clucks/<%= cluck.id %>">
-                  <img src="/img/del-gallo.jpg" width="80" height="80"
-                    class="d-inline-block rounded"></a>
+              <div class="col-sm-3">
+                <a class="card-title" href="/clucks/<%= cluck.id %>">
+                <div class="thumb">
+                <img src="/img/del-gallo.jpg" width="80" height="80"
+                  class="thumbnail"></a>
+                </div>
               </div>
-              <div class="col-md-5-inline">
-                    <a class="card-title" href="/clucks/<%= cluck.id %>">
-                    <%= cluck.username %> - <%= cluck.created_at %> </a>
-                    <p class="card-text"><%= cluck.content %></p>
-                    <p class="card-text"><%= cluck.image_url %></p>
-                    <% if (cluck.image_url) { %>
-                      <img src="<%= cluck.image_url %>" width="300"
-                        class="d-inline-block rounded">
-                    <% }  %>
-
+              <div class="col-sm-9 text-content">
+                <div class="row">
+                  <a class="card-title" href="/clucks/<%= cluck.id %>">
+                  <%= cluck.username %> - <%= cluck.created_at %> </a>
+                  <p class="card-text"><%= cluck.content %></p>
+                  <p class="card-text"><%= cluck.image_url %></p>
+                </div>
+                <div class="row mx-auto d-block img-div">
+                  <% if (cluck.image_url) { %>
+                    <img src="<%= cluck.image_url %>"
+                      class="rounded img-url">
+                  <% }  %>
+                </div>
             </div>
           </div>
         </div>

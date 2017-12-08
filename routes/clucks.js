@@ -1,6 +1,11 @@
+const path = require('path');
+const multer = require('multer');
 const express = require('express');
 const router = express.Router();
 const knex = require('../db');
+
+const UPLOADS_DIR = 'uploads';
+const upload = multer({dest: path.join(__dirname, '..', 'public', UPLOADS_DIR)});
 
 // PATH: /clucks/new VERB: GET Serves form for creating clucks
 router.get('/new', (request, response) => {
@@ -21,10 +26,13 @@ router.get('/:id', (request, response) => {
 });
 
 // PATH: /clucks VERB: POST Creating new clucks
-router.post('/', (request, response) => {
+router.post('/', upload.single('picture'), (request, response) => {
   const username = request.body.username;
   const content = request.body.content;
-  const image_url = request.body.image_url;
+  // const image_url = request.body.image_url;
+
+  const filename = request.file.filename;
+  const image_url = path.join(UPLOADS_DIR, filename);
 
   knex
     .insert({username, content, image_url})
