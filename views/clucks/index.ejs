@@ -15,6 +15,11 @@
                     <%= cluck.username %> - <%= cluck.created_at %> </a>
                     <p class="card-text"><%= cluck.content %></p>
                     <p class="card-text"><%= cluck.image_url %></p>
+                    <% if (cluck.image_url) { %>
+                      <img src="<%= cluck.image_url %>" width="300"
+                        class="d-inline-block rounded">
+                    <% }  %>
+
             </div>
           </div>
         </div>
