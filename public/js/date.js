@@ -1,35 +1,47 @@
-// Set the unit values in milliseconds.
-var msecPerMinute = 1000 * 60;
-var msecPerHour = msecPerMinute * 60;
-var msecPerDay = msecPerHour * 24;
+const tDate = (
 
-// Set a date and get the milliseconds
-var date = new Date('6/15/1990');
-var dateMsec = date.getTime();
+  function tStamp(dateRec) {
 
-// Set the date to January 1, at midnight, of the specified year.
-date.setMonth(0);
-date.setDate(1);
-date.setHours(0, 0, 0, 0);
+    var timeStamp = '';
 
-// Get the difference in milliseconds.
-var interval = dateMsec - date.getTime();
+    // Set the unit values in milliseconds.
+    var msecPerMinute = 1000 * 60;
+    var msecPerHour = msecPerMinute * 60;
+    var msecPerDay = msecPerHour * 24;
 
-// Calculate how many days the interval contains. Subtract that
-// many days from the interval to determine the remainder.
-var days = Math.floor(interval / msecPerDay );
-interval = interval - (days * msecPerDay );
+    // Set a currDate and get the milliseconds
+    var currDate = new Date();
+    var startDate = new Date(dateRec);
 
-// Calculate the hours, minutes, and seconds.
-var hours = Math.floor(interval / msecPerHour );
-interval = interval - (hours * msecPerHour );
+    // Get the difference in milliseconds.
+    var interval = currDate.getTime() - startDate.getTime();
 
-var minutes = Math.floor(interval / msecPerMinute );
-interval = interval - (minutes * msecPerMinute );
 
-var seconds = Math.floor(interval / 1000 );
+    // Calculate how many days the interval contains. Subtract that
+    // many days from the interval to determine the remainder.
+    var days = Math.floor(interval / msecPerDay );
+    interval = interval - (days * msecPerDay );
 
-// Display the result.
-console.log(days + " days, " + hours + " hours, " + minutes + " minutes, " + seconds + " seconds.");
+    // Calculate the hours, minutes, and seconds.
+    var hours = Math.floor(interval / msecPerHour );
+    interval = interval - (hours * msecPerHour );
 
-//Output: 164 days, 23 hours, 0 minutes, 0 seconds.
+    var minutes = Math.floor(interval / msecPerMinute );
+    interval = interval - (minutes * msecPerMinute );
+
+    var seconds = Math.floor(interval / 1000 );
+    //console.log(days);
+
+    // Display the result.
+    if (days > 0){
+      timeStamp = days + " days ago";
+    } else if (hours > 0) {
+      timeStamp = hours + " hours ago";
+    } else if (minutes > 0) {
+      timeStamp = minutes + " minutes ago";
+    } else {
+      timeStamp = "just now";
+    }
+
+    return timeStamp;
+  })

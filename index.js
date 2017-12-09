@@ -10,8 +10,8 @@ app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/home', (request, response) => {
-  response.render('home');
+app.get('/', (request, response) => {
+  response.redirect('./clucks');
 });
 
 const clucksRouter = require('./routes/clucks');

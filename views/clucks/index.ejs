@@ -1,8 +1,51 @@
 <%- include('../partials/header') %>
 
-    <% for (let cluck of clucks) { %>
+    <% var timeStamp = '';
+
+      for (let cluck of clucks) {
+
+        // Set the unit values in milliseconds.
+        var msecPerMinute = 1000 * 60;
+        var msecPerHour = msecPerMinute * 60;
+        var msecPerDay = msecPerHour * 24;
+
+        // Set a currDate and get the milliseconds
+        var currDate = new Date();
+        var startDate = new Date(cluck.created_at);
+
+        // Get the difference in milliseconds.
+        var interval = currDate.getTime() - startDate.getTime();
+
+
+        // Calculate how many days the interval contains. Subtract that
+        // many days from the interval to determine the remainder.
+        var days = Math.floor(interval / msecPerDay );
+        interval = interval - (days * msecPerDay );
+
+        // Calculate the hours, minutes, and seconds.
+        var hours = Math.floor(interval / msecPerHour );
+        interval = interval - (hours * msecPerHour );
+
+        var minutes = Math.floor(interval / msecPerMinute );
+        interval = interval - (minutes * msecPerMinute );
+
+        var seconds = Math.floor(interval / 1000 );
+        //console.log(days);
+
+        // Display the result.
+        if (days > 0){
+          timeStamp = days + " days ago";
+        } else if (hours > 0) {
+          timeStamp = hours + " hours ago";
+        } else if (minutes > 0) {
+          timeStamp = minutes + " minutes ago";
+        } else {
+          timeStamp = "just now";
+        }
+
+      %>
       <div class="container">
-        <div class="card card w-100">
+        <div class="card w-100">
           <div class="card-body">
             <div class="row">
               <div class="col-sm-3">
@@ -14,12 +57,17 @@
               </div>
               <div class="col-sm-9 text-content">
                 <div class="row">
-                  <a class="card-title" href="/clucks/<%= cluck.id %>">
-                  <%= cluck.username %> - <%= cluck.created_at %> </a>
+                  <p class="card-title"><a  href="/clucks/<%= cluck.id %>">
+                  <%= cluck.username %> - <%= timeStamp %> </a></p>
+                  <br>
+                </div>
+                <div class="row">
                   <p class="card-text"><%= cluck.content %></p>
+                </div>
+                <div class="row">
                   <p class="card-text"><%= cluck.image_url %></p>
                 </div>
-                <div class="row mx-auto d-block img-div">
+                <div class="mx-auto d-block img-div">
                   <% if (cluck.image_url) { %>
                     <img src="<%= cluck.image_url %>"
                       class="rounded img-url">
