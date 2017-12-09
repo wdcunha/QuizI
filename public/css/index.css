@@ -1,0 +1,21 @@
+.home-poster {
+  border-radius: 5px;
+  width: 80vmin;
+}
+
+.text-content{
+  padding-left:10px;
+}
+.navbar{
+  padding:0;
+}
+.thumb{
+  text-align: right;
+}
+.img-url {
+  width: 300px;
+  height: 300px;
+}
+.img-div {
+  text-align: center;
+}
